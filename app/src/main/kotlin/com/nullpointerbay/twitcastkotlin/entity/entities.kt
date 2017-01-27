@@ -2,10 +2,10 @@ package com.nullpointerbay.twitcastkotlin.entity
 
 data class AccessToken(val tokenType: String, val expiresIn: Long, val accessToken: String)
 
-data class Movie(val id: String, val user_id: String, val title: String, val subtitle: String?,
+data class Movie(val id: String, val userId: String, val title: String, val subtitle: String?,
                  val category: String?, val link: String, val isLive: Boolean,
-                 val isRecorded: Boolean, val commentCount: Int, val large_thumbnail: String,
-                 val small_thumbnail: String, val country: String, val duration: Int,
+                 val isRecorded: Boolean, val commentCount: Int, val largeThumbnail: String,
+                 val smallThumbnail: String, val country: String, val duration: Int,
                  val created: Int, val isCollabo: Boolean, val isProtected: Boolean,
                  val maxViewCount: Int, val currentViewCount: Int, val totalViewCount: Int,
                  val hlsUrl: String)
@@ -31,3 +31,7 @@ data class SupporterList(val total: Int, val supporters: List<SupporterUser>)
 data class Category(val id: String, val name: String, val subCategories: List<SubCategory>)
 
 data class SubCategory(val id: String, val name: String, val count: Int)
+
+data class SearchResult(val movie: Movie, val broadcaster: User, val tags: List<String>)
+
+data class ApiSearchResult(val movies: List<SearchResult>)

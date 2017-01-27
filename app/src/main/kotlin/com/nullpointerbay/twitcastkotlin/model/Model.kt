@@ -25,7 +25,7 @@ interface Model {
                 .create()
 
         val logging = HttpLoggingInterceptor()
-        logging.level = HttpLoggingInterceptor.Level.BASIC
+        logging.level = HttpLoggingInterceptor.Level.BODY
         val client = OkHttpClient.Builder()
                 .addInterceptor(logging)
                 .addInterceptor(ApiHeaderInterceptor(simpleKvStore))
@@ -50,8 +50,8 @@ class ApiHeaderInterceptor(val simpleKVStore: SimpleKVStore) : Interceptor {
         if (token.isNotEmpty()) {
             var request: Request? = chain?.request()?.newBuilder()
                     ?.addHeader("X-Api-Version", "2.0")
-                    ?.addHeader("Authorization", token)
-                    ?.addHeader("Accept-Encoding", "gzip")
+                    ?.addHeader("Authorization", "Bearer $token")
+//                    ?.addHeader("Accept-Encoding", "gzip")
                     ?.build()
             return chain?.proceed(request)!!
         } else {
